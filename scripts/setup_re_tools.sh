@@ -49,19 +49,21 @@ sudo ln -sf /opt/jadx/bin/jadx /usr/local/bin/jadx
 sudo ln -sf /opt/jadx/bin/jadx-gui /usr/local/bin/jadx-gui
 
 echo "[8] Install Frida..."
-sudo apt install -y python3 python3-pip python3-venv
+sudo apt install -y python3 python3-pip python3-venv pipx
 
-pip3 install frida-tools
-pip3 install frida
+pipx ensurepath
+
+pipx install frida-tools
+
+python3 -m venv ~/.frida-env
+~/.frida-env/bin/pip install frida
 
 if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
     echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc
-    source ~/.bashrc
 fi
 
 echo "[9] Extra utilities..."
-sudo apt install -y binutils coreutils net-tools
-pip3 install pycryptodome
+sudo apt install -y binutils coreutils net-tools python3-pycryptodome
 
 echo "[10] Install SQLite3..."
 sudo apt install -y sqlite3
@@ -69,3 +71,4 @@ sudo apt install -y sqlite3
 echo "-----------------------------------------"
 echo " All reverse-engineering tools installed."
 echo "-----------------------------------------"
+
