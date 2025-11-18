@@ -40,13 +40,25 @@ sudo mv apktool.jar /usr/local/bin/
 
 echo "[7] Install JADX..."
 cd ~
+
 if [[ ! -f "jadx-1.5.1.zip" ]]; then
     wget https://github.com/skylot/jadx/releases/download/v1.5.1/jadx-1.5.1.zip
 fi
-unzip -o jadx-1.5.1.zip
-sudo mv jadx-1.5.1 /opt/jadx || true
+
+sudo mkdir -p /opt/jadx
+
+rm -rf ~/jadx-temp
+mkdir ~/jadx-temp
+unzip -o jadx-1.5.1.zip -d ~/jadx-temp
+
+sudo rm -rf /opt/jadx/* 
+sudo cp -r ~/jadx-temp/* /opt/jadx/
+
 sudo ln -sf /opt/jadx/bin/jadx /usr/local/bin/jadx
 sudo ln -sf /opt/jadx/bin/jadx-gui /usr/local/bin/jadx-gui
+
+rm -rf ~/jadx-temp
+
 
 echo "[8] Install Frida..."
 sudo apt install -y python3 python3-pip python3-venv pipx
