@@ -12,4 +12,5 @@ ciphertext = raw[12:]
 cipher = AES.new(key, AES.MODE_GCM, nonce=iv)
 plaintext = cipher.decrypt(ciphertext)
 
-print("DECRYPTED:", plaintext.decode("utf-8"))
+print("DECRYPTED:", plaintext)
+
